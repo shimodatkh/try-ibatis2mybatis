@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Mon Jun 13 00:57:48 JST 2016-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pageLink">
+
+    <select id="selectUserCount" resultType="java.lang.String" resultSetType="SCROLL_INSENSITIVE">
+        SELECT
+            COUNT(MEMBER_CODE)
+        FROM
+            MEMBER
+    </select>
+
+    <select id="selectUserList" resultType="jp.terasoluna.thin.functionsample.pagelink.bean.UserBean" resultSetType="SCROLL_INSENSITIVE">
+        SELECT
+            MEMBER_CODE AS ID,
+            MEMBER_NAME AS NAME,
+            MEMBER_AGE AS AGE,
+            MEMBER_BIRTH AS BIRTH
+        FROM
+            MEMBER
+        ORDER BY
+            MEMBER_CODE
+    </select>
+
+    <select id="selectAddressList" resultType="jp.terasoluna.thin.functionsample.pagelink.bean.AddressBean">
+        SELECT CUSTOMER_CODE AS customerCode,
+               CUSTOMER_NAME AS customerName,
+               CUSTOMER_TEL AS customerTel,
+               CUSTOMER_ADDRESS AS customerAddress,
+               POST_CODE AS postCode
+        FROM 
+               ADDRESS 
+        ORDER BY
+               CUSTOMER_CODE
+    </select>
+  
+    <select id="selectAddressCount" resultType="java.lang.String" resultSetType="SCROLL_INSENSITIVE">
+        SELECT
+            COUNT(CUSTOMER_CODE)
+        FROM
+            ADDRESS
+    </select>
+    
+</mapper>

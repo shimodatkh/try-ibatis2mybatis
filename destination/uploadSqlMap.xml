@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Mon Jun 13 00:57:49 JST 2016-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="upload">
+	<insert id="insertUpLoad" parameterType="jp.terasoluna.thin.functionsample.upload.bean.TupdownloadVO">
+		INSERT INTO TUPDOWNLOAD(
+		FILEID,
+		FILENAME,
+		FILEPATH,
+		FILESIZE
+		)
+		VALUES
+		 (
+		#{fileId},
+		#{fileName},
+		#{filePath},
+		#{fileSize}
+		)
+	</insert>
+	<select id="selectListUpload" resultType="jp.terasoluna.thin.functionsample.upload.bean.TupdownloadVO">
+		SELECT
+		    FILEID AS fileId,
+		    FILENAME AS fileName,
+		    FILEPATH AS filePath,
+		    FILESIZE as fileSize
+		FROM
+		    TUPDOWNLOAD
+		ORDER BY
+		    FILEID
+	</select>
+	<select id="selectListDownload" resultType="jp.terasoluna.thin.functionsample.download.bean.FileDownLoadMenuBean">
+		SELECT DISTINCT
+		    FILENAME AS fileName,
+		    FILEPATH AS filePath,
+		    FILESIZE AS fileSize
+		FROM
+		    TUPDOWNLOAD
+		ORDER BY
+		    FILEPATH,
+		    fileName
+	</select>
+	<select id="selectFileCount" resultType="java.lang.Integer" resultSetType="SCROLL_INSENSITIVE">
+		SELECT
+		    COUNT( Distinct FILENAME)
+		FROM
+		    TUPDOWNLOAD
+	</select>
+	<select id="selectListDownloadBLogic" resultType="jp.terasoluna.thin.functionsample.downloadblogic.bean.DownloadFileBLogicInput">
+		SELECT DISTINCT
+		    FILENAME AS fileName,
+		    FILEPATH AS filePath,
+		    FILESIZE AS fileSize
+		FROM
+		    TUPDOWNLOAD
+		ORDER BY
+		    FILEPATH,
+		    fileName
+	</select>
+	<select id="selectDeleteFile" parameterType="jp.terasoluna.thin.functionsample.download.bean.FileDownLoadMenuBean" resultType="jp.terasoluna.thin.functionsample.download.bean.FileDownLoadMenuBean">
+		SELECT
+		    FILENAME AS fileName,
+		    FILEPATH AS filePath,
+		    FILESIZE AS fileSize
+		FROM
+		    TUPDOWNLOAD
+		WHERE
+		    FILENAME = #{fileName} AND
+		    FILEPATH = #{filePath}
+	</select>
+	<delete id="deleteFile" parameterType="jp.terasoluna.thin.functionsample.download.bean.FileDownLoadMenuBean">
+		DELETE
+		FROM
+		    TUPDOWNLOAD
+		WHERE
+		    FILENAME = #{fileName} AND
+		    FILEPATH = #{filePath}
+	</delete>
+
+</mapper>

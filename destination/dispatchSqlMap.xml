@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Mon Jun 13 00:57:48 JST 2016-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dispatch">
+
+  <select id="selectListUser" resultType="jp.terasoluna.thin.functionsample.dispatch.bean.UserVO">
+    SELECT USER_CODE AS userCode,
+           USER_NAME AS userName,
+           USER_DIVISION AS userDivision
+        FROM 
+           TUSER 
+        ORDER BY
+           USER_CODE
+  </select>
+  
+  <update id="updateUserDivision" parameterType="jp.terasoluna.thin.functionsample.dispatch.bean.UserDivisionVO">
+    UPDATE TUSER
+        SET
+           USER_DIVISION = #{userDivision}
+        WHERE
+           USER_CODE = #{userCode}
+  </update>
+  
+</mapper>
